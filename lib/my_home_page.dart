@@ -16,7 +16,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   Future<void> fetchData() async {
-    final response = await http.get(Uri.parse('http://43.155.28.252/fetch_data.php'));
+    final response = await http.get(Uri.parse('https://api.tbmods.xyz/fetch_data.php'));
 
     if (response.statusCode == 200) {
       setState(() {
