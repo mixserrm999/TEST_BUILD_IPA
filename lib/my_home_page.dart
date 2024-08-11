@@ -41,24 +41,21 @@ class _MyHomePageState extends State<MyHomePage> {
     // Handle navigation
     switch (index) {
       case 0:
-        // Handle Home button
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => MyHomePage()), // Navigate to Home
+          MaterialPageRoute(builder: (context) => MyHomePage()), 
         );
         break;
       case 1:
-        // Handle Update button
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => UpdatePage()), // Create and navigate to UpdatePage
+          MaterialPageRoute(builder: (context) => UpdatePage()), 
         );
         break;
       case 2:
-        // Handle Settings button
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SettingsPage()), // Create and navigate to SettingsPage
+          MaterialPageRoute(builder: (context) => SettingsPage()), 
         );
         break;
     }
@@ -85,12 +82,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   ? CircularProgressIndicator()
                   : Expanded(
                       child: ListView.builder(
+                        physics: BouncingScrollPhysics(), // ปรับฟิสิกส์การเลื่อนเพื่อความราบรื่น
                         itemCount: data.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Card(
-                              key: ValueKey(data[index]['id']), // Unique key for each card
+                              key: ValueKey(data[index]['id']), 
                               elevation: 4,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -109,8 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                         ),
                                       );
                                     },
-                                    child: Image.network(
-                                      data[index]['image_url'], // Use image URL from API
+                                    child: FadeInImage.assetNetwork(
+                                      placeholder: 'assets/placeholder.png', // ใส่ภาพ placeholder เพื่อแสดงระหว่างโหลด
+                                      image: data[index]['image_url'], 
                                       height: 200,
                                       fit: BoxFit.cover,
                                     ),
