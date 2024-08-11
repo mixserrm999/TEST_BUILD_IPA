@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       );
                                     },
                                     child: FadeInImage.assetNetwork(
-                                      placeholder: 'assets/placeholder.png', // ใส่ภาพ placeholder เพื่อแสดงระหว่างโหลด
+                                      placeholder: 'icon/berserk-ios.png', // ใส่ภาพ placeholder เพื่อแสดงระหว่างโหลด
                                       image: data[index]['image_url'], 
                                       height: 200,
                                       fit: BoxFit.cover,
