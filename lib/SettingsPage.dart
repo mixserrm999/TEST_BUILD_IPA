@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -11,6 +11,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final storage = FlutterSecureStorage();
   bool _isLoading = false;
   String _message = '';
   String _username = '';
@@ -22,10 +23,8 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Future<void> _loadUser() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _username = prefs.getString('username') ?? '';
-    });
+    _username = await storage.read(key: 'username') ?? '';
+    setState(() {});
   }
 
   Future<void> _login() async {
@@ -51,8 +50,8 @@ class _SettingsPageState extends State<SettingsPage> {
     if (response.statusCode == 200) {
       final result = json.decode(response.body);
       if (result['success']) {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('username', username);
+        await storage.write(key: 'username', value: username);
+        await storage.write(key: 'loginToken', value: 'your_token'); // บันทึก token ที่นี่
         setState(() {
           _username = username;
           _message = 'Login successful!';
@@ -70,8 +69,8 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Future<void> _logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('username');
+    await storage.delete(key: 'username');
+    await storage.delete(key: 'loginToken');
     setState(() {
       _username = '';
     });
