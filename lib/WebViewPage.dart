@@ -10,7 +10,7 @@ class WebViewPage extends StatelessWidget {
       ),
       body: InAppWebView(
         initialUrlRequest: URLRequest(
-          url: WebUri('https://chatgpt.com'),
+          url: WebUri('https://demo.robrowser.com/?demo/2.7/'),
         ),
         initialOptions: InAppWebViewGroupOptions(
           crossPlatform: InAppWebViewOptions(
