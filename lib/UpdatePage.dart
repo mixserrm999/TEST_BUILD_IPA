@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'AddCardPage.dart'; // Import the AddCardPage
 import 'AddDetailPage.dart'; // Import the DetailPage
+import 'WebViewPage.dart'; // Import the WebViewPage
 
 class UpdatePage extends StatelessWidget {
   final storage = FlutterSecureStorage();
@@ -50,6 +51,16 @@ class UpdatePage extends StatelessWidget {
                       );
                     },
                     child: Text('Add Details'), // Button to add details
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => WebViewPage(url: 'https://chatgpt.com')), // Navigate to WebViewPage
+                      );
+                    },
+                    child: Text('Open Web Page'), // Button to open web page
                   ),
                 ],
               ),
